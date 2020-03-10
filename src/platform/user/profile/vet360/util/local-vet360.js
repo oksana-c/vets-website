@@ -184,34 +184,40 @@ export default {
     );
   },
   updateTransaction(transactionId) {
-    return asyncReturn({
-      data: {
-        attributes: {
-          transactionId,
-          transactionStatus:
-            VET360_CONSTANTS.TRANSACTION_STATUS.COMPLETED_SUCCESS,
+    return asyncReturn(
+      {
+        data: {
+          attributes: {
+            transactionId,
+            transactionStatus:
+              VET360_CONSTANTS.TRANSACTION_STATUS.COMPLETED_SUCCESS,
+          },
         },
       },
-    });
+      2000,
+    );
   },
   updateTransactionToFailure(transactionId, code = 'VET360_CORE100') {
-    return {
-      data: {
-        attributes: {
-          transactionStatus: VET360_CONSTANTS.TRANSACTION_STATUS.REJECTED,
-          transactionId,
-          type: 'AsyncTransaction::Vet360::MockedTransaction',
-          metadata: [
-            {
-              code,
-              key: '_CUF_NOT_FOUND',
-              severity: 'ERROR',
-              text: 'The tx for id/criteria XZY could not be found.',
-            },
-          ],
+    return asyncReturn(
+      {
+        data: {
+          attributes: {
+            transactionStatus: VET360_CONSTANTS.TRANSACTION_STATUS.REJECTED,
+            transactionId,
+            type: 'AsyncTransaction::Vet360::MockedTransaction',
+            metadata: [
+              {
+                code,
+                key: '_CUF_NOT_FOUND',
+                severity: 'ERROR',
+                text: 'The tx for id/criteria XZY could not be found.',
+              },
+            ],
+          },
         },
       },
-    };
+      1000,
+    );
   },
   addressValidationSuccessSingleConfirmedSuggestion() {
     return asyncReturn(
