@@ -7,6 +7,8 @@ import {
   isEnrollmentStatusLoading,
 } from './selectors';
 
+console.log('bad'); // eslint-disable-line
+
 // flip the `false` to `true` to fake the endpoint when testing locally
 const simulateServerLocally = environment.isLocalhost() && false;
 
